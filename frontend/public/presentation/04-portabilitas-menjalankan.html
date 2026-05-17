@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hygiopark - Portabilitas dan Cara Menjalankan</title>
+    <link rel="stylesheet" href="presentation-theme.css" />
+  </head>
+  <body class="page-portability">
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+    <div class="cursor-aura"></div>
+    <div class="shell">
+      <header class="topbar">
+        <div class="brand">
+          <b>Hygiopark Presentation</b>
+          <span>Halaman 4 dari 5: kesiapan pindah perangkat, langkah setup, dan checklist verifikasi.</span>
+        </div>
+        <nav class="nav">
+          <a href="/">Landing Page</a>
+          <a href="index.html">Dashboard</a>
+          <a href="01-database-erd.html">Database</a>
+          <a href="02-dokumentasi-sistem.html">Sistem</a>
+          <a href="03-pengembangan-lanjutan.html">Pengembangan</a>
+          <a class="active" href="04-portabilitas-menjalankan.html">Portabilitas</a>
+          <a href="05-module-pembelajaran.html">Pembelajaran</a>
+        </nav>
+      </header>
+
+      <section class="hero">
+        <div class="eyebrow">Portabilitas Aplikasi</div>
+        <h1>Hygiopark cukup siap dijalankan di perangkat lain selama environment dan database ikut disiapkan.</h1>
+        <div class="hero-copy">
+          <p class="hover-text">
+            Project ini sudah memiliki <code>.env.example</code>, <code>package.json</code>, lockfile dependency,
+            schema Prisma, seed data, dan konfigurasi deploy. Artinya source code aman dipindah ke laptop lain atau repository Git.
+          </p>
+          <p class="hover-text">
+            Tantangan utamanya bukan pada isi source code, tetapi pada konsistensi environment: URL database,
+            secret key, callback payment, dan sinkronisasi port frontend-backend harus tetap benar setelah dipindahkan.
+          </p>
+          <p class="hover-text">
+            Karena itu, halaman ini tidak hanya menjelaskan perintah terminal, tetapi juga apa saja yang harus
+            disiapkan sebelum mulai, urutan setup yang aman, dan cara memeriksa apakah aplikasi benar-benar siap dipakai.
+          </p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="status-grid">
+          <div class="card">
+            <span class="pill">Sudah Siap</span>
+            <h2>Checklist Kesiapan</h2>
+            <div class="check">
+              <div>Ada <code>backend/.env.example</code> dan <code>frontend/.env.example</code> sebagai template konfigurasi.</div>
+              <div>Dependency sudah terdokumentasi di <code>backend/package.json</code> dan <code>frontend/package.json</code>.</div>
+              <div>Schema dan seed database tersedia di folder <code>backend/prisma/</code>.</div>
+              <div>Frontend dan backend terpisah jelas sehingga setup ulang lebih mudah.</div>
+              <div>Deploy dasar sudah dipersiapkan melalui Docker, Nginx, dan PM2.</div>
+            </div>
+          </div>
+          <div class="card">
+            <span class="pill">Perlu Disiapkan Ulang</span>
+            <h2>Yang Tidak Boleh Diandalkan dari Mesin Lama</h2>
+            <div class="check">
+              <div><code>.env</code> dan <code>.env.local</code> harus dibuat ulang dari template.</div>
+              <div><code>node_modules/</code> tidak perlu dipindah; cukup install ulang.</div>
+              <div><code>frontend/dist/</code> bisa dibuat ulang lewat proses build.</div>
+              <div>Database PostgreSQL harus aktif dan sesuai isi <code>DATABASE_URL</code>.</div>
+              <div>Jika memakai Midtrans, key dan callback harus diisi ulang sesuai perangkat atau server baru.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Apa Saja yang Harus Disiapkan Sebelum Menjalankan</h2>
+        <p class="text-block">
+          Sebelum membuka terminal, pastikan perangkat tujuan sudah siap secara alat, software, dan konfigurasi.
+          Persiapan ini penting karena sebagian besar error awal biasanya muncul bukan dari source code, tetapi dari
+          dependency yang belum lengkap, database yang belum aktif, atau file environment yang belum benar.
+        </p>
+        <div class="split">
+          <div class="card">
+            <h3>Software dan Tools yang Dibutuhkan</h3>
+            <div class="check">
+              <div><strong>Node.js + npm</strong> untuk menjalankan backend Express dan frontend React/Vite.</div>
+              <div><strong>PostgreSQL</strong> jika ingin database berjalan langsung di sistem tanpa Docker.</div>
+              <div><strong>Docker Desktop</strong> sebagai alternatif paling praktis untuk menyalakan PostgreSQL.</div>
+              <div><strong>Code editor</strong> seperti VS Code untuk melihat source code dan mengubah konfigurasi.</div>
+              <div><strong>Browser</strong> untuk membuka frontend dan mengetes alur login serta reservasi.</div>
+              <div><strong>Terminal</strong> PowerShell, Command Prompt, atau terminal editor untuk menjalankan perintah project.</div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Data dan Konfigurasi yang Harus Siap</h3>
+            <div class="check">
+              <div><strong>Folder project lengkap</strong> yang berisi <code>backend/</code>, <code>frontend/</code>, dan file root project.</div>
+              <div><strong>File env backend</strong> dari <code>backend/.env.example</code> menjadi <code>.env</code>.</div>
+              <div><strong>File env frontend</strong> dari <code>frontend/.env.example</code> menjadi <code>.env.local</code>.</div>
+              <div><strong>DATABASE_URL</strong> yang benar dan mengarah ke PostgreSQL yang aktif.</div>
+              <div><strong>JWT secret</strong> dan pengaturan URL frontend-backend yang saling cocok.</div>
+              <div><strong>Midtrans key</strong> bila ingin fitur payment diuji, atau biarkan mode demo jika belum ada.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Cara Menjalankan di Perangkat Lain</h2>
+        <p class="text-block">
+          Urutan setup paling aman adalah menyiapkan environment, menginstall dependency, menyalakan database,
+          menjalankan migrasi schema, mengisi seed, lalu baru menyalakan backend dan frontend. Dengan urutan ini,
+          error biasanya lebih mudah dilacak karena penyebabnya tidak tercampur.
+        </p>
+        <div class="split">
+          <div class="card">
+            <h3>Langkah Umum</h3>
+            <ol>
+              <li>Clone repository atau salin folder project lengkap ke perangkat tujuan.</li>
+              <li>Pastikan Node.js sudah terinstall, lalu cek dengan <code>node -v</code> dan <code>npm -v</code>.</li>
+              <li>Siapkan PostgreSQL lokal atau jalankan container database lewat Docker.</li>
+              <li>Masuk ke folder <code>backend</code> lalu salin <code>.env.example</code> menjadi <code>.env</code>.</li>
+              <li>Masuk ke folder <code>frontend</code> lalu salin <code>.env.example</code> menjadi <code>.env.local</code>.</li>
+              <li>Isi variabel penting seperti <code>DATABASE_URL</code>, <code>JWT_SECRET</code>, <code>FRONTEND_URL</code>, dan <code>VITE_API_URL</code>.</li>
+              <li>Install dependency backend dengan <code>npm install</code>, lalu lakukan <code>prisma generate</code>, migrasi, dan seed.</li>
+              <li>Install dependency frontend dengan <code>npm install</code>, lalu jalankan server frontend.</li>
+              <li>Start backend terlebih dahulu, baru frontend, agar API sudah siap saat halaman dibuka.</li>
+              <li>Buka frontend di browser, login dengan akun demo, lalu uji alur slot, reservasi, dan dashboard.</li>
+            </ol>
+          </div>
+          <div class="card">
+            <h3>Akun Demo Bawaan</h3>
+            <table>
+              <thead>
+                <tr><th>Peran</th><th>Email</th><th>Password</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Admin</td><td><code>admin@hygiopark.io</code></td><td><code>password123</code></td></tr>
+                <tr><td>Operator</td><td><code>operator@hygiopark.io</code></td><td><code>password123</code></td></tr>
+                <tr><td>User</td><td><code>user@hygiopark.io</code></td><td><code>password123</code></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Urutan Menjalankan yang Paling Aman</h2>
+        <div class="timeline">
+          <article class="step"><div class="num">01</div><div><h3>Cek versi dan alat</h3><p>Pastikan Node.js, npm, dan PostgreSQL atau Docker benar-benar tersedia. Jika alat dasar belum siap, langkah berikutnya akan gagal.</p></div></article>
+          <article class="step"><div class="num">02</div><div><h3>Siapkan file environment</h3><p>Backend dan frontend harus punya file env sendiri. Jangan jalankan project sebelum variabel dasar seperti URL database dan secret key diisi.</p></div></article>
+          <article class="step"><div class="num">03</div><div><h3>Aktifkan database</h3><p>Hygiopark bergantung pada PostgreSQL. Jika database belum hidup, migrasi dan seed tidak akan jalan.</p></div></article>
+          <article class="step"><div class="num">04</div><div><h3>Install dependency backend</h3><p>Backend perlu package seperti Express, Prisma, JWT, bcrypt, dan Socket.IO sebelum server bisa dijalankan.</p></div></article>
+          <article class="step"><div class="num">05</div><div><h3>Generate, migrate, dan seed database</h3><p>Langkah ini membuat struktur tabel dan mengisi data demo seperti akun, lot, slot, reservasi, dan payment.</p></div></article>
+          <article class="step"><div class="num">06</div><div><h3>Jalankan backend</h3><p>Setelah backend aktif, baru frontend punya target API yang bisa dipanggil untuk login dan mengambil data.</p></div></article>
+          <article class="step"><div class="num">07</div><div><h3>Install dan jalankan frontend</h3><p>Frontend React/Vite menampilkan halaman dan menghubungkan user ke API backend.</p></div></article>
+          <article class="step"><div class="num">08</div><div><h3>Lakukan pengecekan hasil</h3><p>Uji login akun demo, buka dashboard, cek slot, dan lakukan satu reservasi agar setup benar-benar tervalidasi.</p></div></article>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Perintah Terminal yang Berguna</h2>
+        <div class="split">
+          <div class="card">
+            <h3>Cek Alat di Perangkat Baru</h3>
+            <pre><code>node -v
+npm -v
+docker -v
+docker compose version</code></pre>
+            <p class="hover-text">Jalankan ini lebih dulu untuk memastikan Node.js, npm, dan Docker memang tersedia sebelum setup project dimulai.</p>
+          </div>
+          <div class="card">
+            <h3>Masuk ke Folder Project</h3>
+            <pre><code>cd path\\ke\\smart-parking
+dir
+cd backend</code></pre>
+            <p class="hover-text">Berguna setelah project dipindah lewat ZIP agar terminal benar-benar bekerja dari folder project yang tepat.</p>
+          </div>
+          <div class="card">
+            <h3>Backend</h3>
+            <pre><code>cd backend
+copy .env.example .env
+npm install
+npx prisma generate
+npx prisma migrate dev --name init
+node prisma/seed.js
+npm run dev</code></pre>
+            <p class="hover-text">Backend default berjalan di <code>http://localhost:4000</code>, tetapi dapat pindah port otomatis jika 4000 sudah dipakai.</p>
+          </div>
+          <div class="card">
+            <h3>Frontend</h3>
+            <pre><code>cd frontend
+copy .env.example .env.local
+npm install
+npm run dev</code></pre>
+            <p class="hover-text">Frontend default berjalan di <code>http://localhost:5173</code>.</p>
+          </div>
+          <div class="card">
+            <h3>Database dengan Docker</h3>
+            <pre><code>cd ..
+docker compose up -d postgres
+docker compose ps</code></pre>
+            <p class="hover-text">Cocok dipakai jika PostgreSQL belum terpasang langsung di sistem.</p>
+          </div>
+          <div class="card">
+            <h3>Perintah Tambahan</h3>
+            <pre><code>cd backend
+npm run db:generate
+npm run db:migrate
+npm run db:seed
+npm run db:studio
+npm run midtrans:check</code></pre>
+            <p class="hover-text">Perintah ini membantu validasi database, seed ulang, dan pengecekan konfigurasi payment.</p>
+          </div>
+          <div class="card">
+            <h3>Jika Folder Baru Dipindah dari ZIP</h3>
+            <pre><code>cd backend
+copy .env.example .env
+npm install
+cd ..\\frontend
+copy .env.example .env.local
+npm install</code></pre>
+            <p class="hover-text">Ini adalah setup minimum yang hampir selalu dibutuhkan di perangkat baru karena file env dan dependency biasanya tidak ikut siap pakai.</p>
+          </div>
+          <div class="card">
+            <h3>Build Ulang Frontend Jika Perlu</h3>
+            <pre><code>cd frontend
+npm run build
+npm run preview</code></pre>
+            <p class="hover-text">Pakai ini jika ingin memastikan folder build bisa dibuat ulang dan frontend siap dipreview tanpa development mode.</p>
+          </div>
+          <div class="card">
+            <h3>Cek Port dan Koneksi Dasar</h3>
+            <pre><code>curl http://localhost:4000/api/health
+curl http://localhost:5173
+netstat -ano | findstr :4000
+netstat -ano | findstr :5173</code></pre>
+            <p class="hover-text">Berguna untuk memastikan backend dan frontend benar-benar hidup, serta untuk mengecek apakah ada konflik port di perangkat tujuan.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Jika Terjadi Error Saat Menjalankan</h2>
+        <div class="split">
+          <div class="card">
+            <h3>Error yang Sering Muncul</h3>
+            <div class="check">
+              <div><strong>Database connection failed</strong> biasanya berarti PostgreSQL belum hidup atau <code>DATABASE_URL</code> salah.</div>
+              <div><strong>Module not found</strong> biasanya karena <code>npm install</code> belum dijalankan di folder yang benar.</div>
+              <div><strong>Prisma client not generated</strong> biasanya perlu <code>npx prisma generate</code>.</div>
+              <div><strong>Port already in use</strong> berarti port 4000 atau 5173 sudah dipakai proses lain.</div>
+              <div><strong>Frontend gagal fetch API</strong> biasanya karena URL backend di env frontend belum cocok.</div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Cara Melacaknya</h3>
+            <div class="check">
+              <div>Baca error dari terminal backend dan frontend secara terpisah agar sumber masalah lebih jelas.</div>
+              <div>Cek apakah file env sudah dibuat dari contoh dan tidak ada variabel penting yang kosong.</div>
+              <div>Pastikan database sudah berisi tabel hasil migrasi, bukan hanya server PostgreSQL yang aktif.</div>
+              <div>Gunakan akun demo bawaan setelah seed selesai untuk memastikan data awal sudah masuk.</div>
+              <div>Jika payment belum dipakai, fokus dulu memastikan login, dashboard, slot, dan reservasi dasar berhasil.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Hal yang Perlu Dicek Setelah Setup</h2>
+        <div class="split">
+          <div class="card">
+            <h3>Pemeriksaan Dasar</h3>
+            <div class="check">
+              <div>Pastikan backend dapat terhubung ke PostgreSQL tanpa error.</div>
+              <div>Pastikan frontend mengarah ke URL API yang benar melalui file env.</div>
+              <div>Cek apakah login akun demo berhasil dan dashboard terbuka.</div>
+              <div>Uji satu alur reservasi sampai data muncul di halaman reservasi.</div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Pemeriksaan Lanjutan</h3>
+            <div class="check">
+              <div>Jika memakai Midtrans, pastikan mode sandbox atau production sesuai env.</div>
+              <div>Jika memakai real-time, cek update slot saat aplikasi dibuka di dua tab.</div>
+              <div>Jika backend pindah port otomatis, sesuaikan URL frontend agar koneksi tidak gagal.</div>
+              <div>Jika deploy, cek juga Nginx, Docker, PM2, dan file build frontend.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Kesimpulan Portabilitas</h2>
+        <div class="card">
+          <p class="hover-text">
+            Hygiopark sudah cukup siap untuk dipindahkan ke perangkat lain, dipresentasikan, atau diunggah ke repository.
+            Hambatan utamanya bukan pada struktur source code, tetapi pada persiapan environment, database, dan layanan eksternal.
+          </p>
+          <p class="hover-text">
+            Kalau bagian ini ingin dipresentasikan singkat, cukup tekankan bahwa source code sudah portable, sedangkan
+            proses setup tetap butuh ketelitian pada environment dan layanan pihak ketiga.
+          </p>
+        </div>
+      </section>
+    </div>
+    <script src="presentation-theme.js"></script>
+  </body>
+</html>
+
+

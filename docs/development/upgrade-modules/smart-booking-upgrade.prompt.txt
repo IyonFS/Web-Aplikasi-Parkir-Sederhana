@@ -1,0 +1,31 @@
+Gunakan modul `smart-booking-upgrade` dari project Smart Parking lama ini, lalu terapkan seluruh perubahan berikut ke project/folder yang sedang aktif.
+
+Tujuan utama:
+1. Restore fitur `Waitlist / Smart Queue`
+2. Restore fitur `Recurring Booking`
+3. Restore redesign UI `Reservasi`, `Slot Parkir`, dan `Dashboard`
+4. Restore modal custom `Masuk Antrian`
+5. Restore motion polish dan konsistensi visual
+
+Instruksi kerja:
+- Kerjakan langsung end-to-end, jangan hanya memberi rencana
+- Adaptasikan struktur file jika project baru berbeda, tapi pertahankan hasil akhir dan behavior fitur
+- Jika backend memakai Prisma, buat/update model waitlist dan recurring
+- Tambahkan API, service, scheduler, dan seed/demo data yang setara
+- Di frontend, buat halaman `Reservasi` menjadi `Smart Booking Hub`
+- Di halaman `Slot Parkir`, ganti semua prompt/alert antrean dengan modal custom yang konsisten dengan reservasi
+- Di `Dashboard`, buat tampilan lebih bersih, profesional, interaktif, dan role-aware
+- Tambahkan animation utility halus seperti pulse, float, dan shine bila belum ada
+- Setelah implementasi, lakukan verifikasi build/test yang relevan
+
+Kontrak hasil minimum:
+- Waitlist aktif dari halaman slot terisi
+- Recurring booking aktif dari halaman reservasi
+- Reservations page padat dan tidak menyisakan ruang kosong besar
+- Dashboard terlihat modern dan usable
+- Frontend build berhasil
+
+Referensi implementasi yang harus diikuti:
+- docs/development/upgrade-modules/smart-booking-upgrade.module.md
+- docs/development/upgrade-modules/smart-booking-upgrade.manifest.json
+

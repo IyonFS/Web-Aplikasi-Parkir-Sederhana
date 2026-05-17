@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hygiopark - Alur Pengerjaan dan Pengembangan</title>
+    <link rel="stylesheet" href="presentation-theme.css" />
+  </head>
+  <body class="page-progress">
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+    <div class="cursor-aura"></div>
+    <div class="shell">
+      <header class="topbar">
+        <div class="brand">
+          <b>Hygiopark Presentation</b>
+          <span>Halaman 3 dari 5: alur pengerjaan, arah pengembangan, perbaikan teknis, dan risiko.</span>
+        </div>
+        <nav class="nav">
+          <a href="/">Landing Page</a>
+          <a href="index.html">Dashboard</a>
+          <a href="01-database-erd.html">Database</a>
+          <a href="02-dokumentasi-sistem.html">Sistem</a>
+          <a class="active" href="03-pengembangan-lanjutan.html">Pengembangan</a>
+          <a href="04-portabilitas-menjalankan.html">Portabilitas</a>
+          <a href="05-module-pembelajaran.html">Pembelajaran</a>
+        </nav>
+      </header>
+
+      <section class="hero">
+        <div class="eyebrow">Progress Pengembangan</div>
+        <h1>Hygiopark dibangun bertahap dari pondasi dasar menuju sistem parkir yang semakin pintar.</h1>
+        <div class="hero-copy">
+          <p class="hover-text">
+            Dari struktur kode yang ada, terlihat bahwa project ini berkembang secara bertahap: dimulai dari
+            autentikasi, data master, modul slot dan reservasi, lalu ditambah payment gateway, audit log, real-time,
+            waitlist, dan recurring booking.
+          </p>
+          <p class="hover-text">
+            Halaman ini penting untuk menunjukkan bahwa project tidak dibuat sekaligus, melainkan tumbuh secara logis
+            dari kebutuhan dasar menuju fitur yang lebih kompleks dan realistis.
+          </p>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Alur Pengerjaan yang Sudah Dilalui</h2>
+        <p class="text-block">
+          Urutan berikut membantu menjelaskan bahwa aplikasi tumbuh dari modul inti ke modul lanjutan. Penjelasan ini
+          biasanya memudahkan audiens memahami prioritas pengerjaan dan alasan urutan implementasi fitur.
+        </p>
+        <div class="timeline">
+          <article class="step"><div class="num">01</div><div><h3>Menyiapkan pondasi project</h3><p>Frontend dan backend dipisah, lalu ditambahkan package, Vite, Express, Prisma, dan environment file.</p></div></article>
+          <article class="step"><div class="num">02</div><div><h3>Membuat autentikasi dan role</h3><p>Login, register, proteksi route, refresh token, dan pembagian akses admin, operator, serta user.</p></div></article>
+          <article class="step"><div class="num">03</div><div><h3>Menyusun data master parkir</h3><p>Area parkir, slot parkir, tarif, kendaraan, dan user management dibangun untuk kebutuhan operasional.</p></div></article>
+          <article class="step"><div class="num">04</div><div><h3>Membangun alur reservasi utama</h3><p>User dapat memilih slot, menentukan waktu, melihat status, membatalkan, memperpanjang, dan mengakses QR ticket.</p></div></article>
+          <article class="step"><div class="num">05</div><div><h3>Menambahkan pembayaran</h3><p>Payment dibuat dengan mode demo dan integrasi Midtrans agar aplikasi bisa dipresentasikan maupun dikembangkan lebih jauh.</p></div></article>
+          <article class="step"><div class="num">06</div><div><h3>Menambahkan fitur cerdas</h3><p>Waitlist, recurring booking, notifikasi, dan scheduler membuat alur parkir lebih otomatis dan realistis.</p></div></article>
+          <article class="step"><div class="num">07</div><div><h3>Merapikan monitoring dan dokumentasi</h3><p>Analytics, audit log, struktur folder, dan dokumen presentasi disiapkan agar project mudah dijelaskan.</p></div></article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="split">
+          <div class="card">
+            <span class="pill ok">Rencana Lanjutan</span>
+            <h2>Fitur yang Layak Dilanjutkan</h2>
+            <div class="list-box">
+              <div class="item"><strong>Scan QR di gerbang masuk/keluar</strong> Reservasi bisa diverifikasi otomatis saat kendaraan datang.</div>
+              <div class="item"><strong>Riwayat transaksi lebih lengkap</strong> Termasuk filter periode, ekspor PDF/Excel, dan cetak laporan.</div>
+              <div class="item"><strong>Peta slot yang lebih visual</strong> Denah interaktif per lantai agar operator cepat membaca kondisi parkir.</div>
+              <div class="item"><strong>Push notification atau email</strong> Untuk reminder booking, antrean waitlist, dan status pembayaran.</div>
+              <div class="item"><strong>Multi-cabang atau multi-gedung</strong> Agar satu sistem dapat mengelola beberapa lokasi sekaligus.</div>
+              <div class="item"><strong>Testing otomatis</strong> Unit test dan integration test agar perubahan fitur lebih aman.</div>
+            </div>
+          </div>
+          <div class="card">
+            <span class="pill warn">Catatan Teknis</span>
+            <h2>Perbaikan yang Disarankan</h2>
+            <div class="list-box">
+              <div class="item"><strong>Dokumentasi arsitektur</strong> Bisa ditambah diagram alur request, modul, dan API flow.</div>
+              <div class="item"><strong>Optimasi validasi form</strong> Error feedback di frontend masih bisa dibuat lebih detail dan lebih jelas.</div>
+              <div class="item"><strong>Audit akses operator</strong> Role operator bisa diperdalam jika hak akses perlu dibuat lebih spesifik.</div>
+              <div class="item"><strong>Hardening produksi</strong> Logging, monitoring error, backup database, dan manajemen secret perlu diperketat.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Arah Pengembangan yang Paling Masuk Akal</h2>
+        <div class="split">
+          <div class="card">
+            <h3>Untuk Pengguna</h3>
+            <div class="list-box">
+              <div class="item"><strong>Reservasi lebih cepat</strong> Menyimpan kendaraan favorit, jam favorit, dan tombol pesan ulang.</div>
+              <div class="item"><strong>Status parkir lebih jelas</strong> Menampilkan progres dari booking, pembayaran, hingga parkir selesai.</div>
+              <div class="item"><strong>Notifikasi yang konsisten</strong> Reminder sebelum booking dimulai atau saat slot waitlist tersedia.</div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Untuk Admin dan Operator</h3>
+            <div class="list-box">
+              <div class="item"><strong>Monitoring lebih rinci</strong> Heatmap slot sibuk, pendapatan per area, dan performa operator.</div>
+              <div class="item"><strong>Audit dan keamanan</strong> Log aktivitas yang lebih rinci serta kontrol role yang lebih tersegmentasi.</div>
+              <div class="item"><strong>Automasi operasional</strong> Pengingat perawatan slot, laporan otomatis, dan backup terjadwal.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Bug atau Risiko yang Masih Perlu Diperhatikan</h2>
+        <div class="split">
+          <div class="card">
+            <span class="pill danger">Risiko Operasional</span>
+            <div class="list-box">
+              <div class="item"><strong>Port backend bisa berubah otomatis</strong> Jika port 4000 dipakai, backend pindah ke port lain dan frontend bisa salah target jika env belum disesuaikan.</div>
+              <div class="item"><strong>Scheduler bergantung pada proses backend</strong> Fitur recurring dan expiry waitlist hanya berjalan jika server backend terus aktif.</div>
+              <div class="item"><strong>Integrasi Midtrans bergantung pada env</strong> Jika key atau callback belum benar, pembayaran bisa tetap berjalan di mode demo atau status tidak sinkron.</div>
+            </div>
+          </div>
+          <div class="card">
+            <span class="pill danger">Risiko Pengembangan</span>
+            <div class="list-box">
+              <div class="item"><strong>File demo lama masih ada</strong> <code>backend/data/db.js</code> menunjukkan versi in-memory lama dan bisa membingungkan bila tidak dijelaskan.</div>
+              <div class="item"><strong>Belum terlihat suite test otomatis</strong> Modul reservasi, payment, waitlist, dan recurring lebih berisiko saat diubah.</div>
+              <div class="item"><strong>Perbedaan mode lokal dan produksi</strong> Build, env, dan layanan eksternal bisa menimbulkan bug yang tidak muncul saat demo lokal sederhana.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Cara Menjelaskan Halaman Ini Saat Presentasi</h2>
+        <div class="card">
+          <p class="hover-text">
+            Jika ingin presentasi terasa runtut, jelaskan dulu bahwa fitur dasar seperti auth, slot, dan reservasi
+            adalah pondasi. Setelah itu baru tunjukkan bahwa payment, waitlist, recurring, dan analytics merupakan
+            lapisan lanjutan yang menambah nilai praktis dan nilai inovasi pada aplikasi.
+          </p>
+        </div>
+      </section>
+    </div>
+    <script src="presentation-theme.js"></script>
+  </body>
+</html>
+
+

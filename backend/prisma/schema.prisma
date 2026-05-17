@@ -1,0 +1,301 @@
+// Prisma Schema - Smart Parking Management System
+// Run: npx prisma migrate dev --name init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ── Enums ──────────────────────────────────────────────────────────────────
+
+enum Role {
+  guest
+  user
+  operator
+  admin
+}
+
+enum SlotType {
+  standard
+  ev
+  disabled
+}
+
+enum VehicleType {
+  motorcycle
+  car
+  van
+  bus
+  other
+}
+
+enum SlotStatus {
+  available
+  occupied
+  maintenance
+}
+
+enum ReservationStatus {
+  pending_payment
+  active
+  completed
+  cancelled
+  expired
+}
+
+enum WaitlistStatus {
+  waiting
+  notified
+  confirmed
+  expired
+  cancelled
+}
+
+enum RecurrenceType {
+  daily
+  weekly
+}
+
+// ── Models ─────────────────────────────────────────────────────────────────
+
+model User {
+  id           String   @id @default(uuid())
+  name         String
+  email        String   @unique
+  password     String
+  role         Role     @default(user)
+  phone        String?
+  avatarUrl    String?  @db.Text @map("avatar_url")
+  isActive     Boolean  @default(true) @map("is_active")
+  lastLoginAt  DateTime? @map("last_login_at")
+  lastLoginDevice String? @map("last_login_device")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @default(now()) @updatedAt @map("updated_at")
+
+  // Relations
+  reservations  Reservation[]
+  waitlistEntries WaitlistEntry[]
+  recurringBookings RecurringBooking[]
+  managedLots   ParkingLot[]
+  vehicles      Vehicle[]
+  refreshTokens RefreshToken[]
+  auditLogs     AuditLog[]
+
+  @@map("users")
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  tokenHash String   @unique @map("token_hash")
+  expiresAt DateTime @map("expires_at")
+  revoked   Boolean  @default(false)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("refresh_tokens")
+}
+
+model ParkingLot {
+  id          String  @id @default(uuid())
+  operatorId  String? @map("operator_id")
+  name        String
+  address     String
+  latitude    Float?
+  longitude   Float?
+  totalSlots  Int     @default(0) @map("total_slots")
+  isActive    Boolean @default(true) @map("is_active")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @default(now()) @updatedAt @map("updated_at")
+
+  // Relations
+  operator User?         @relation(fields: [operatorId], references: [id], onDelete: SetNull)
+  slots    ParkingSlot[]
+
+  @@index([operatorId])
+  @@map("parking_lots")
+}
+
+model ParkingSlot {
+  id           String     @id @default(uuid())
+  lotId        String     @map("lot_id")
+  number       String
+  floor        String
+  type         SlotType   @default(standard)
+  status       SlotStatus @default(available)
+  pricePerHour Float      @default(5) @map("price_per_hour")
+  isActive     Boolean    @default(true) @map("is_active")
+  createdAt    DateTime   @default(now()) @map("created_at")
+  updatedAt    DateTime   @default(now()) @updatedAt @map("updated_at")
+
+  // Relations
+  lot          ParkingLot    @relation(fields: [lotId], references: [id], onDelete: Cascade)
+  reservations Reservation[]
+  waitlistEntries WaitlistEntry[]
+  recurringBookings RecurringBooking[]
+
+  @@unique([lotId, number])
+  @@index([lotId, status])
+  @@index([status])
+  @@map("parking_slots")
+}
+
+model Reservation {
+  id           String            @id @default(uuid())
+  userId       String            @map("user_id")
+  slotId       String            @map("slot_id")
+  slotNumber   String            @map("slot_number")
+  vehiclePlate String            @map("vehicle_plate")
+  vehicleType  VehicleType       @default(car) @map("vehicle_type")
+  startTime    DateTime          @map("start_time")
+  endTime      DateTime          @map("end_time")
+  hours        Int
+  totalAmount  Float             @map("total_amount")
+  status       ReservationStatus @default(active)
+  cancelledAt  DateTime?         @map("cancelled_at")
+  completedAt  DateTime?         @map("completed_at")
+  createdAt    DateTime          @default(now()) @map("created_at")
+  updatedAt    DateTime          @default(now()) @updatedAt @map("updated_at")
+
+  // Relations
+  user    User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  slot    ParkingSlot @relation(fields: [slotId], references: [id], onDelete: Restrict)
+  payment Payment?
+
+  @@index([userId, createdAt(sort: Desc)])
+  @@index([slotId, status])
+  @@index([status, startTime])
+  @@map("reservations")
+}
+
+model Payment {
+  id               String    @id @default(uuid())
+  reservationId    String    @unique @map("reservation_id")
+  method           String    @default("pending")
+  amount           Float
+  currency         String    @default("IDR")
+  status           String    @default("pending")       // pending | paid | failed | expired | refunded
+  // Midtrans fields
+  snapToken        String?   @map("snap_token")
+  snapRedirectUrl  String?   @map("snap_redirect_url")
+  midtransOrderId  String?   @unique @map("midtrans_order_id")
+  midtransPaymentType String? @map("midtrans_payment_type")
+  midtransTransactionId String? @map("midtrans_transaction_id")
+  midtransStatus   String?   @map("midtrans_status")
+  vaNumber         String?   @map("va_number")
+  vaBank           String?   @map("va_bank")
+  receiptUrl       String?   @map("receipt_url")
+  paidAt           DateTime? @map("paid_at")
+  expiredAt        DateTime? @map("expired_at")
+  refundedAt       DateTime? @map("refunded_at")
+  createdAt        DateTime  @default(now()) @map("created_at")
+  updatedAt        DateTime  @default(now()) @updatedAt @map("updated_at")
+
+  // Relations
+  reservation Reservation @relation(fields: [reservationId], references: [id], onDelete: Cascade)
+
+  @@index([reservationId])
+  @@index([midtransOrderId])
+  @@map("payments")
+}
+
+model ParkingTariff {
+  id           String      @id @default(uuid())
+  name         String
+  vehicleType  VehicleType @default(car) @map("vehicle_type")
+  pricePerHour Float       @map("price_per_hour")
+  description  String?
+  isActive     Boolean     @default(true) @map("is_active")
+  createdAt    DateTime    @default(now()) @map("created_at")
+  updatedAt    DateTime    @default(now()) @updatedAt @map("updated_at")
+
+  @@index([vehicleType, isActive])
+  @@map("parking_tariffs")
+}
+
+model Vehicle {
+  id          String      @id @default(uuid())
+  ownerId     String?     @map("owner_id")
+  plateNumber String      @unique @map("plate_number")
+  vehicleType VehicleType @default(car) @map("vehicle_type")
+  brand       String?
+  color       String?
+  isActive    Boolean     @default(true) @map("is_active")
+  createdAt   DateTime    @default(now()) @map("created_at")
+  updatedAt   DateTime    @default(now()) @updatedAt @map("updated_at")
+
+  owner User? @relation(fields: [ownerId], references: [id], onDelete: SetNull)
+
+  @@index([ownerId, isActive])
+  @@map("vehicles")
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  userId    String?  @map("user_id")
+  action    String
+  entity    String
+  entityId  String?  @map("entity_id")
+  metadata  Json?
+  ipAddress String?  @map("ip_address")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([entity, entityId])
+  @@index([userId, createdAt(sort: Desc)])
+  @@map("audit_logs")
+}
+
+model WaitlistEntry {
+  id                String         @id @default(uuid())
+  userId            String         @map("user_id")
+  slotId            String         @map("slot_id")
+  vehiclePlate      String         @map("vehicle_plate")
+  hours             Int            @default(2)
+  status            WaitlistStatus @default(waiting)
+  notifiedAt        DateTime?      @map("notified_at")
+  confirmDeadlineAt DateTime?      @map("confirm_deadline_at")
+  confirmedAt       DateTime?      @map("confirmed_at")
+  createdAt         DateTime       @default(now()) @map("created_at")
+  updatedAt         DateTime       @default(now()) @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  slot ParkingSlot @relation(fields: [slotId], references: [id], onDelete: Cascade)
+
+  @@index([slotId, status, createdAt(sort: Asc)])
+  @@index([userId, createdAt(sort: Desc)])
+  @@map("waitlist_entries")
+}
+
+model RecurringBooking {
+  id               String         @id @default(uuid())
+  userId           String         @map("user_id")
+  slotId           String         @map("slot_id")
+  vehiclePlate     String         @map("vehicle_plate")
+  durationHours    Int            @default(2) @map("duration_hours")
+  recurrence       RecurrenceType @default(daily)
+  weekdays         Int[]          @default([])
+  startHour        Int            @map("start_hour")
+  startMinute      Int            @default(0) @map("start_minute")
+  autoJoinWaitlist Boolean        @default(true) @map("auto_join_waitlist")
+  isActive         Boolean        @default(true) @map("is_active")
+  nextRunAt        DateTime       @map("next_run_at")
+  lastRunAt        DateTime?      @map("last_run_at")
+  createdAt        DateTime       @default(now()) @map("created_at")
+  updatedAt        DateTime       @default(now()) @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  slot ParkingSlot @relation(fields: [slotId], references: [id], onDelete: Cascade)
+
+  @@index([isActive, nextRunAt])
+  @@index([userId, createdAt(sort: Desc)])
+  @@map("recurring_bookings")
+}
+

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hygiopark - Deskripsi Program</title>
+    <link rel="stylesheet" href="presentation-theme.css" />
+  </head>
+  <body>
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+    <div class="cursor-aura"></div>
+    <div class="shell">
+      <header class="topbar">
+        <div class="brand">
+          <b>Hygiopark Presentation</b>
+          <span>Halaman 2 dari 5: deskripsi program, struktur modul, fitur, dan alur sistem.</span>
+        </div>
+        <nav class="nav">
+          <a href="/">Landing Page</a>
+          <a href="index.html">Dashboard</a>
+          <a href="01-database-erd.html">Database</a>
+          <a class="active" href="02-dokumentasi-sistem.html">Sistem</a>
+          <a href="03-pengembangan-lanjutan.html">Pengembangan</a>
+          <a href="04-portabilitas-menjalankan.html">Portabilitas</a>
+          <a href="05-module-pembelajaran.html">Pembelajaran</a>
+        </nav>
+      </header>
+
+      <section class="hero">
+        <div class="eyebrow">Deskripsi Program</div>
+        <h1>Hygiopark adalah aplikasi parkir pintar berbasis web dengan struktur yang jelas dan modular.</h1>
+        <div class="hero-copy">
+          <p class="hover-text">
+            Sistem ini dirancang untuk membantu pengelolaan slot parkir, reservasi, pembayaran, monitoring aktivitas,
+            serta fitur otomatis seperti waitlist dan recurring booking.
+          </p>
+          <p class="hover-text">
+            Frontend, backend, dan database dipisah dengan rapi agar project mudah dipahami saat presentasi dan tetap
+            nyaman dilanjutkan ketika masuk tahap pengembangan berikutnya.
+          </p>
+          <p class="hover-text">
+            Halaman ini cocok dipakai sebagai jembatan antara penjelasan database dan demo fitur, karena isinya
+            menunjukkan bagaimana semua bagian project saling bekerja sama dari tampilan sampai penyimpanan data.
+          </p>
+        </div>
+        <div class="mini-stats">
+          <div class="card"><span>Frontend</span><h2>React</h2><p>Antarmuka pengguna, router, context, dan halaman utama.</p></div>
+          <div class="card"><span>Backend</span><h2>Express</h2><p>Logika bisnis, route, auth, service, dan integrasi eksternal.</p></div>
+          <div class="card"><span>Data</span><h2>Prisma + PostgreSQL</h2><p>Penyimpanan relasional, migrasi, seed, dan skema inti.</p></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Arsitektur Program</h2>
+        <p class="text-block">
+          Frontend menjadi lapisan interaksi pengguna, backend menjadi pusat logika dan keamanan, sedangkan database
+          menyimpan data permanen. Pemisahan ini membuat debugging, scaling, dan pembagian tanggung jawab lebih mudah.
+        </p>
+        <div class="overview">
+          <div class="card">
+            <h3>Alur Besar Sistem</h3>
+            <div class="list-box">
+              <div class="item"><strong>Frontend</strong> React + Vite menangani halaman, form, state global, dan komunikasi API.</div>
+              <div class="item"><strong>Backend</strong> Express menangani autentikasi, validasi role, logika reservasi, pembayaran, dan scheduler.</div>
+              <div class="item"><strong>Database</strong> Prisma menjadi penghubung antara backend dan PostgreSQL.</div>
+              <div class="item"><strong>Real-time</strong> Socket.IO dipakai untuk update status slot dan notifikasi waitlist/recurring.</div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Titik Masuk Penting</h3>
+            <div class="list-box">
+              <div class="item"><strong><code>backend/server.js</code></strong> Menyalakan server, koneksi database, socket, dan scheduler.</div>
+              <div class="item"><strong><code>backend/src/app.js</code></strong> Menyusun middleware, route, rate limiter, dan error handler.</div>
+              <div class="item"><strong><code>frontend/src/main.jsx</code></strong> Entry frontend React dan root render aplikasi.</div>
+              <div class="item"><strong><code>frontend/src/app/App.jsx</code></strong> Menyusun router, provider context, dan proteksi halaman.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Alur Kerja Sistem dari Pengguna ke Database</h2>
+        <div class="overview">
+          <div class="card">
+            <h3>Alur Frontend ke Backend</h3>
+            <div class="list-box">
+              <div class="item"><strong>1. User membuka halaman</strong> React Router menentukan halaman dan provider menyiapkan auth, theme, socket, serta notifikasi.</div>
+              <div class="item"><strong>2. User melakukan aksi</strong> Misalnya login, memilih slot, membuat reservasi, atau melihat histori.</div>
+              <div class="item"><strong>3. Service frontend memanggil API</strong> File di <code>frontend/src/services/</code> mengirim request ke backend secara terstruktur.</div>
+              <div class="item"><strong>4. Backend memproses</strong> Route, controller, service, dan Prisma bekerja sesuai fitur yang dipanggil.</div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Alur Backend ke Database</h3>
+            <div class="list-box">
+              <div class="item"><strong>5. Validasi dan role dicek</strong> Middleware memastikan request aman dan sesuai hak akses.</div>
+              <div class="item"><strong>6. Prisma mengakses PostgreSQL</strong> Data dibaca, disimpan, atau diperbarui berdasarkan schema.</div>
+              <div class="item"><strong>7. Response dikirim balik</strong> Frontend menerima hasil dan memperbarui tampilan.</div>
+              <div class="item"><strong>8. Socket memperbarui status</strong> Perubahan penting dapat disiarkan ke client lain secara real-time.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Penjelasan Folder dan File Penting</h2>
+        <div class="split">
+          <div class="card">
+            <h3>Root Project</h3>
+            <table>
+              <thead>
+                <tr><th>Folder/File</th><th>Fungsi</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><code>backend/</code></td><td>API, logic bisnis, koneksi database, WebSocket, seed data, dan konfigurasi server.</td></tr>
+                <tr><td><code>frontend/</code></td><td>Tampilan aplikasi, halaman React, komponen UI, context, dan service API.</td></tr>
+                <tr><td><code>docs/</code></td><td>Dokumentasi presentasi dan catatan teknis pengembangan.</td></tr>
+                <tr><td><code>deploy/</code></td><td>Konfigurasi deploy seperti Nginx, PM2, dan script penunjang.</td></tr>
+                <tr><td><code>docker-compose*.yml</code></td><td>Menjalankan service via container untuk lokal atau produksi.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card">
+            <h3>Isi Backend dan Frontend</h3>
+            <table>
+              <thead>
+                <tr><th>Lokasi</th><th>Penjelasan</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><code>backend/src/modules/</code></td><td>Pengelompokan fitur seperti auth, users, parking, reports, logs, areas, tariffs, dan vehicles.</td></tr>
+                <tr><td><code>backend/prisma/</code></td><td>Schema database, migrasi, dan seed data demo.</td></tr>
+                <tr><td><code>frontend/src/pages/</code></td><td>Halaman utama seperti dashboard, slots, reservations, analytics, profile, login, dan register.</td></tr>
+                <tr><td><code>frontend/src/components/</code></td><td>Layout, modal, kartu slot, notifikasi, empty state, dan komponen reusable.</td></tr>
+                <tr><td><code>frontend/src/services/</code></td><td>Lapisan komunikasi API untuk auth, slots, reservations, payments, analytics, waitlist, dan recurring.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Fitur, Fungsi, dan Halaman Web</h2>
+        <div class="feature-grid">
+          <article class="feature"><h3>Autentikasi &amp; Role</h3><p>Login, register, proteksi halaman, dan pembagian akses admin, operator, serta user.</p></article>
+          <article class="feature"><h3>Dashboard</h3><p>Ringkasan status parkir, statistik cepat, dan jalur menuju modul operasional.</p></article>
+          <article class="feature"><h3>Manajemen Slot</h3><p>Menampilkan status slot per area, tipe slot, dan aksi perubahan data.</p></article>
+          <article class="feature"><h3>Reservasi Parkir</h3><p>User memilih slot, menentukan durasi, memperpanjang, membatalkan, dan melihat tiket QR.</p></article>
+          <article class="feature"><h3>Pembayaran</h3><p>Mendukung mode demo dan integrasi Midtrans dengan invoice, webhook, dan status transaksi.</p></article>
+          <article class="feature"><h3>Waitlist &amp; Recurring</h3><p>Slot penuh dapat dialihkan ke antrean, dan kebutuhan rutin ditangani dengan booking berulang.</p></article>
+          <article class="feature"><h3>Analytics &amp; Logs</h3><p>Admin memantau laporan, pendapatan, peak hours, dan aktivitas sistem.</p></article>
+          <article class="feature"><h3>Manajemen Master</h3><p>Admin mengatur user, area parkir, tarif, kendaraan, dan data pendukung lainnya.</p></article>
+          <article class="feature"><h3>Profil &amp; Notifikasi</h3><p>User memperbarui data diri dan menerima informasi penting dari sistem.</p></article>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Desain Web yang Dipakai</h2>
+        <div class="split">
+          <div class="card">
+            <h3>Bahasa Visual</h3>
+            <ul>
+              <li>Tampilan dominan gelap dengan aksen hijau, selaras dengan identitas dashboard modern.</li>
+              <li>Kartu, badge status, dan border tipis dipakai untuk menjaga fokus pada data dan aksi penting.</li>
+              <li>Animasi hover ditambahkan sampai ke teks dan elemen kecil agar halaman terasa lebih interaktif saat dipresentasikan.</li>
+              <li>Layout dibuat tetap nyaman dibaca pada layar besar maupun layar kecil.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Halaman yang Tersedia di Router</h3>
+            <ul>
+              <li><code>/</code> untuk landing page.</li>
+              <li><code>/login</code> dan <code>/register</code> untuk autentikasi.</li>
+              <li><code>/app/dashboard</code> untuk ringkasan utama.</li>
+              <li><code>/app/slots</code>, <code>/app/reservations</code>, <code>/app/analytics</code>, dan <code>/app/profile</code>.</li>
+              <li>Halaman admin: <code>/app/areas</code>, <code>/app/tariffs</code>, <code>/app/vehicles</code>, <code>/app/users</code>, dan <code>/app/activity-logs</code>.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="presentation-theme.js"></script>
+  </body>
+</html>
+
+

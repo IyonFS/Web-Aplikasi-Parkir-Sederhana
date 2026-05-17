@@ -1,0 +1,56 @@
+{
+  "module": "smart-booking-upgrade",
+  "version": "1.0.0",
+  "goal": "Restore all smart booking feature and UI upgrades into a new Smart Parking project with a single prompt.",
+  "features": [
+    "waitlist-smart-queue",
+    "recurring-booking",
+    "reservations-ui-redesign",
+    "slots-ui-redesign",
+    "dashboard-ui-redesign",
+    "ui-motion-polish"
+  ],
+  "backend_files": [
+    "backend/prisma/schema.prisma",
+    "backend/prisma/seed.js",
+    "backend/controllers/waitlist.controller.js",
+    "backend/controllers/recurring.controller.js",
+    "backend/routes/waitlist.routes.js",
+    "backend/routes/recurring.routes.js",
+    "backend/src/services/waitlist.service.js",
+    "backend/src/services/recurring.service.js"
+  ],
+  "frontend_files": [
+    "frontend/src/services/waitlist.service.js",
+    "frontend/src/services/recurring.service.js",
+    "frontend/src/pages/ReservationsPage.jsx",
+    "frontend/src/pages/SlotsPage.jsx",
+    "frontend/src/pages/DashboardPage.jsx",
+    "frontend/src/components/WaitlistModal.jsx",
+    "frontend/src/index.css"
+  ],
+  "api_routes": [
+    "GET /api/waitlist",
+    "POST /api/waitlist",
+    "POST /api/waitlist/:id/confirm",
+    "POST /api/waitlist/:id/cancel",
+    "GET /api/recurring",
+    "POST /api/recurring",
+    "POST /api/recurring/:id/toggle",
+    "DELETE /api/recurring/:id",
+    "POST /api/recurring/run-now"
+  ],
+  "ui_expectations": [
+    "Reservations page becomes Smart Booking Hub with dense top layout",
+    "Slots page uses custom waitlist modal instead of browser prompt",
+    "Dashboard becomes cleaner, more interactive, and role-aware",
+    "Animations are subtle and premium"
+  ],
+  "verification": [
+    "prisma generate",
+    "database updated with waitlist and recurring tables",
+    "frontend build succeeds",
+    "waitlist and recurring flows work from UI"
+  ]
+}
+

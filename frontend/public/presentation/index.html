@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hygiopark Presentation Dashboard</title>
+    <link rel="stylesheet" href="presentation-theme.css" />
+  </head>
+  <body>
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+    <div class="cursor-aura"></div>
+    <div class="shell">
+      <header class="topbar">
+        <div class="brand">
+          <b>Hygiopark Presentation</b>
+          <span>Dashboard dokumentasi untuk analisis sistem, demo presentasi, dan belajar mandiri.</span>
+        </div>
+        <nav class="nav">
+          <a href="/">Landing Page</a>
+          <a class="active" href="index.html">Dashboard</a>
+          <a href="01-database-erd.html">Database</a>
+          <a href="02-dokumentasi-sistem.html">Sistem</a>
+          <a href="03-pengembangan-lanjutan.html">Pengembangan</a>
+          <a href="04-portabilitas-menjalankan.html">Portabilitas</a>
+          <a href="05-module-pembelajaran.html">Pembelajaran</a>
+        </nav>
+      </header>
+
+      <section class="hero hero-split">
+        <article class="panel">
+          <div class="eyebrow">Dokumentasi Inti Hygiopark</div>
+          <h1>Lima halaman penting sekarang tampil lebih hidup dalam satu dashboard pembelajaran Hygiopark.</h1>
+          <div class="hero-copy">
+            <p class="hover-text">
+              Semua materi presentasi dibuat dalam HTML sederhana agar mudah dibuka tanpa server tambahan, tetapi tetap
+              terasa seperti mini-site yang rapi dan siap dipresentasikan.
+            </p>
+            <p class="hover-text">
+              Setiap halaman berdiri sendiri, namun kini memakai gaya global yang sama: hover di elemen kecil, teks,
+              kartu, navigasi, dan cursor kustom yang tampil lebih rapi tanpa efek berlebih.
+            </p>
+            <p class="hover-text">
+              Susunan ini cocok dipakai saat menjelaskan aplikasi dari gambaran umum, lalu masuk ke database,
+              arsitektur sistem, roadmap pengembangan, materi belajar IT, hingga cara menjalankannya di perangkat lain.
+            </p>
+          </div>
+          <div class="hero-actions">
+            <a class="button primary" href="01-database-erd.html">Mulai dari Database</a>
+            <a class="button" href="02-dokumentasi-sistem.html">Lihat Struktur Program</a>
+          </div>
+        </article>
+
+        <aside class="panel">
+          <h2>Ringkasan Cepat</h2>
+          <div class="stats">
+            <div class="stat">
+              <span class="muted">Halaman</span>
+              <strong>5</strong>
+              <span class="muted">Dokumen inti yang saling terhubung.</span>
+            </div>
+            <div class="stat">
+              <span class="muted">Lapisan</span>
+              <strong>3</strong>
+              <span class="muted">Frontend, backend, dan database.</span>
+            </div>
+            <div class="stat">
+              <span class="muted">Fitur besar</span>
+              <strong>8+</strong>
+              <span class="muted">Modul utama yang sudah siap dijelaskan.</span>
+            </div>
+            <div class="stat">
+              <span class="muted">Kegunaan</span>
+              <strong>Demo</strong>
+              <span class="muted">Presentasi, analisis, dan onboarding project.</span>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="section">
+        <h2>Urutan Presentasi yang Disarankan</h2>
+        <div class="split">
+          <div class="card">
+            <h3>Untuk penjelasan teknis</h3>
+            <div class="mini-list">
+              <div>Mulai dari <strong>Database</strong> untuk menunjukkan fondasi data dan relasi inti.</div>
+              <div>Lanjut ke <strong>Sistem</strong> agar audiens paham alur frontend, backend, dan file penting.</div>
+              <div>Sisipkan <strong>Pembelajaran</strong> untuk menjelaskan teknologi, coding dasar, dan istilah penting.</div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Untuk demo pemakaian</h3>
+            <div class="mini-list">
+              <div>Buka <strong>Sistem</strong> lebih dulu untuk memberi gambaran fungsi aplikasi.</div>
+              <div>Lanjut ke <strong>Pembelajaran</strong> jika audiens masih pemula dan perlu penjelasan konsep dasar.</div>
+              <div>Masuk ke <strong>Portabilitas</strong> jika fokus presentasi ada pada setup dan kesiapan deploy.</div>
+              <div>Kembali ke <strong>Database</strong> saat ada pertanyaan detail soal data atau relasi tabel.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid">
+        <a class="card" href="01-database-erd.html">
+          <div class="card-top">
+            <div>
+              <h2>1. Database &amp; ERD</h2>
+              <p>Isi tabel utama, relasi data, alur transaksi, dan struktur model database.</p>
+            </div>
+            <span class="badge">Data Layer</span>
+          </div>
+          <div class="mini-list">
+            <div>Model inti: user, lot, slot, reservasi, payment, dan tarif.</div>
+            <div>Model tambahan: vehicle, audit log, waitlist, recurring, dan token sesi.</div>
+            <div>Disusun agar mudah dijelaskan saat demo maupun sesi tanya jawab teknis.</div>
+          </div>
+        </a>
+
+        <a class="card" href="02-dokumentasi-sistem.html">
+          <div class="card-top">
+            <div>
+              <h2>2. Deskripsi Program</h2>
+              <p>Tujuan aplikasi, struktur folder, alur kerja sistem, fitur, dan desain web.</p>
+            </div>
+            <span class="badge">App Overview</span>
+          </div>
+          <div class="mini-list">
+            <div>Penjelasan root project, backend, frontend, docs, dan deploy.</div>
+            <div>Alur kerja dari React, API Express, Prisma, sampai update real-time.</div>
+            <div>Ringkasan halaman, role pengguna, dan titik masuk penting di project.</div>
+          </div>
+        </a>
+
+        <a class="card" href="03-pengembangan-lanjutan.html">
+          <div class="card-top">
+            <div>
+              <h2>3. Alur Pengerjaan</h2>
+              <p>Tahap pembangunan, rencana fitur berikutnya, rekomendasi teknis, dan risiko.</p>
+            </div>
+            <span class="badge">Progress</span>
+          </div>
+          <div class="mini-list">
+            <div>Urutan kerja dari setup dasar sampai fitur pintar seperti waitlist.</div>
+            <div>Prioritas pengembangan yang realistis untuk pengguna dan admin.</div>
+            <div>Catatan bug, risiko operasional, dan area yang masih perlu penguatan.</div>
+          </div>
+        </a>
+
+        <a class="card" href="04-portabilitas-menjalankan.html">
+          <div class="card-top">
+            <div>
+              <h2>4. Portabilitas &amp; Cara Menjalankan</h2>
+              <p>Kesiapan aplikasi di perangkat lain, langkah setup, dan pemeriksaan pasca-install.</p>
+            </div>
+            <span class="badge">Run Guide</span>
+          </div>
+          <div class="mini-list">
+            <div>File yang aman dipindah dan file yang wajib dibuat ulang.</div>
+            <div>Panduan backend, frontend, PostgreSQL, Prisma, Docker, dan akun demo.</div>
+            <div>Checklist verifikasi agar environment baru tidak hanya jalan, tetapi juga sinkron.</div>
+          </div>
+        </a>
+
+        <a class="card" href="05-module-pembelajaran.html">
+          <div class="card-top">
+            <div>
+              <h2>5. Module Pembelajaran</h2>
+              <p>Materi IT untuk pemula: stack, coding dasar, fungsi file, develop workflow, istilah, dan AI tools.</p>
+            </div>
+            <span class="badge">Learning</span>
+          </div>
+          <div class="mini-list">
+            <div>Menjelaskan React, Express, Prisma, PostgreSQL, dan library pendukung dalam konteks aplikasi parkir.</div>
+            <div>Memuat contoh array, object, looping, route, dan logika dasar dari source code Hygiopark.</div>
+            <div>Membantu siswa atau pengguna baru belajar project sambil tetap terhubung ke aplikasi nyata.</div>
+          </div>
+        </a>
+      </section>
+
+      <footer class="footer">
+        Dashboard ini bisa dibuka langsung dari file HTML. Jika ingin jalur paling aman saat presentasi, mulai dari
+        halaman sistem untuk gambaran umum, lanjut ke pembelajaran untuk audiens pemula, lalu masuk ke database dan
+        portabilitas sesuai kebutuhan audiens.
+      </footer>
+    </div>
+    <script src="presentation-theme.js"></script>
+  </body>
+</html>
+
+

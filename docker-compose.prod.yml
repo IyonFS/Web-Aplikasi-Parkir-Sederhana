@@ -1,0 +1,94 @@
+version: '3.9'
+
+services:
+  # ── PostgreSQL ───────────────────────────────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    container_name: hygiopark-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USER:-hygiopark}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME:-hygiopark}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - hygiopark-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-hygiopark}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Backend API ──────────────────────────────────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: hygiopark-api
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 4000
+      DATABASE_URL: postgresql://${DB_USER:-hygiopark}:${DB_PASSWORD}@postgres:5432/${DB_NAME:-hygiopark}
+      JWT_SECRET: ${JWT_SECRET}
+      FRONTEND_URL: ${FRONTEND_URL:-https://hygiopark.io}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - hygiopark-network
+    # Jalankan migrasi sebelum start server
+    command: sh -c "npx prisma migrate deploy && node server.js"
+
+  # ── Frontend ─────────────────────────────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: ${FRONTEND_URL:-https://hygiopark.io}
+    container_name: hygiopark-web
+    restart: unless-stopped
+    networks:
+      - hygiopark-network
+
+  # ── Nginx Reverse Proxy ───────────────────────────────────────────────────────
+  nginx:
+    image: nginx:alpine
+    container_name: hygiopark-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./deploy/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./deploy/nginx/conf.d:/etc/nginx/conf.d:ro
+      - certbot_certs:/etc/letsencrypt:ro
+      - certbot_www:/var/www/certbot:ro
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - hygiopark-network
+
+  # ── Certbot SSL ───────────────────────────────────────────────────────────────
+  certbot:
+    image: certbot/certbot
+    container_name: hygiopark-certbot
+    volumes:
+      - certbot_certs:/etc/letsencrypt
+      - certbot_www:/var/www/certbot
+    profiles:
+      - ssl  # jalankan hanya saat setup SSL: docker compose --profile ssl run certbot
+
+networks:
+  hygiopark-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  certbot_certs:
+  certbot_www:
+
+

@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hygiopark - Module Pembelajaran</title>
+    <link rel="stylesheet" href="presentation-theme.css" />
+  </head>
+  <body>
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+    <div class="cursor-aura"></div>
+    <div class="shell">
+      <header class="topbar">
+        <div class="brand">
+          <b>Hygiopark Presentation</b>
+          <span>Halaman 5 dari 5: materi pembelajaran IT, dasar coding, tools, file pendukung, dan AI workflow.</span>
+        </div>
+        <nav class="nav">
+          <a href="/">Landing Page</a>
+          <a href="index.html">Dashboard</a>
+          <a href="01-database-erd.html">Database</a>
+          <a href="02-dokumentasi-sistem.html">Sistem</a>
+          <a href="03-pengembangan-lanjutan.html">Pengembangan</a>
+          <a href="04-portabilitas-menjalankan.html">Portabilitas</a>
+          <a class="active" href="05-module-pembelajaran.html">Pembelajaran</a>
+        </nav>
+      </header>
+
+      <section class="hero">
+        <div class="eyebrow">Module Pembelajaran</div>
+        <h1>Halaman ini menjelaskan Hygiopark sebagai bahan belajar anak SMK jurusan IT, bukan hanya sebagai aplikasi jadi.</h1>
+        <div class="hero-copy">
+          <p class="hover-text">
+            Materi di halaman ini dibuat untuk pemula yang ingin paham bagaimana aplikasi parkir web disusun dari
+            frontend, backend, database, konfigurasi, sampai tools yang membantu proses pengembangannya.
+          </p>
+          <p class="hover-text">
+            Isinya bukan teori lepas, tetapi langsung dikaitkan dengan file dan logika yang memang ada di project
+            Hygiopark, sehingga pembelajaran terasa lebih konkret dan mudah dipraktikkan ulang.
+          </p>
+          <p class="hover-text">
+            Dengan pendekatan ini, pengguna bisa melihat bahwa satu aplikasi web sebenarnya adalah gabungan dari
+            banyak konsep dasar: variabel, array, objek, routing, API, database, environment, dan kerja tim.
+          </p>
+        </div>
+        <div class="summary">
+          <div class="metric"><span>Target belajar</span><strong>SMK IT</strong></div>
+          <div class="metric"><span>Bahasa</span><strong>JS + SQL</strong></div>
+          <div class="metric"><span>Stack</span><strong>React, Express, Prisma</strong></div>
+          <div class="metric"><span>Fokus</span><strong>Belajar sambil praktik</strong></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Library dan Framework yang Dipakai</h2>
+        <p class="text-block">
+          Library adalah kumpulan fungsi siap pakai, sedangkan framework adalah kerangka kerja yang mengatur cara
+          aplikasi dibangun. Di Hygiopark, keduanya dipakai bersama agar aplikasi parkir lebih cepat dikembangkan dan
+          lebih rapi saat dipelihara.
+        </p>
+        <div class="feature-grid">
+          <article class="feature">
+            <h3>React</h3>
+            <p class="hover-text">Framework library untuk membangun tampilan frontend berbasis komponen seperti halaman login, dashboard, slot, dan reservasi.</p>
+          </article>
+          <article class="feature">
+            <h3>React Router DOM</h3>
+            <p class="hover-text">Mengatur perpindahan halaman di frontend, misalnya dari <code>/login</code> ke <code>/app/dashboard</code> tanpa reload penuh.</p>
+          </article>
+          <article class="feature">
+            <h3>Axios</h3>
+            <p class="hover-text">Dipakai frontend untuk mengirim request ke backend, misalnya mengambil data slot, user, reservasi, dan laporan.</p>
+          </article>
+          <article class="feature">
+            <h3>Socket.IO</h3>
+            <p class="hover-text">Memberi update real-time, jadi perubahan status slot atau reservasi bisa langsung terlihat tanpa refresh manual.</p>
+          </article>
+          <article class="feature">
+            <h3>Express</h3>
+            <p class="hover-text">Framework backend Node.js yang menangani route API, middleware, validasi akses, dan response JSON untuk aplikasi parkir.</p>
+          </article>
+          <article class="feature">
+            <h3>Prisma</h3>
+            <p class="hover-text">ORM yang menghubungkan kode JavaScript backend ke PostgreSQL, sehingga query database menjadi lebih aman dan terstruktur.</p>
+          </article>
+          <article class="feature">
+            <h3>PostgreSQL</h3>
+            <p class="hover-text">Database relasional utama untuk menyimpan user, lot, slot, reservasi, pembayaran, waitlist, dan log aktivitas.</p>
+          </article>
+          <article class="feature">
+            <h3>bcryptjs + jsonwebtoken</h3>
+            <p class="hover-text">Digunakan untuk keamanan login: password di-hash, lalu user yang berhasil login diberi token akses.</p>
+          </article>
+          <article class="feature">
+            <h3>Vite + Tailwind + PostCSS</h3>
+            <p class="hover-text">Vite mempercepat development frontend, Tailwind membantu styling, dan PostCSS memproses CSS agar lebih praktis.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Bahasa Pemrograman dan Contoh Konsep Dasar</h2>
+        <p class="text-block">
+          Bahasa utama yang dipakai adalah JavaScript di frontend dan backend. Selain itu, ada SQL yang diwakili oleh
+          Prisma untuk struktur database. Bagi siswa SMK, project ini bagus karena memuat banyak materi dasar dalam
+          konteks nyata.
+        </p>
+        <div class="grid">
+          <article class="card">
+            <h3>Contoh Variabel, Function, dan Object</h3>
+            <p class="hover-text">Di backend, data request, user, dan response banyak disimpan sebagai object JavaScript.</p>
+            <pre><code>const apiLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 120,
+  message: { error: "Terlalu banyak request." },
+});
+
+app.get("/api/health", async (_req, res) =&gt; {
+  res.json({
+    status: "ok",
+    db: "connected",
+    ts: new Date().toISOString(),
+  });
+});</code></pre>
+            <p class="hover-text">
+              Dari contoh ini, siswa bisa belajar tentang variabel <code>apiLimiter</code>, function async, object
+              literal, dan response JSON.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>Contoh Array dan Looping</h3>
+            <p class="hover-text">Seed database memuat array dan perulangan untuk membuat banyak slot parkir secara otomatis.</p>
+            <pre><code>const floors = ["A", "B", "C"];
+const slotConfigs = [
+  { type: "standard", price: 5000 },
+  { type: "ev", price: 8000 },
+  { type: "disabled", price: 3000 },
+];
+
+for (const floor of floors) {
+  for (let i = 0; i &lt; slotConfigs.length; i++) {
+    const cfg = slotConfigs[i];
+    slots.push({
+      floor,
+      type: cfg.type,
+      price: cfg.price,
+    });
+  }
+}</code></pre>
+            <p class="hover-text">
+              Bagian ini cocok untuk menjelaskan array, object di dalam array, perulangan <code>for</code>, dan cara
+              data diproses satu per satu.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>Contoh Percabangan dan Logika</h3>
+            <p class="hover-text">Aplikasi parkir banyak memakai percabangan untuk cek hak akses, token, atau status transaksi.</p>
+            <pre><code>function authorize(...roles) {
+  return (req, res, next) =&gt; {
+    if (!roles.includes(req.user.role)) {
+      return res.status(403).json({ error: "Insufficient permissions" });
+    }
+    next();
+  };
+}</code></pre>
+            <p class="hover-text">
+              Siswa bisa belajar konsep parameter, array rest, method <code>includes()</code>, dan kondisi
+              <code>if</code> untuk keamanan sistem.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>Contoh Routing dan Komponen</h3>
+            <p class="hover-text">Frontend React menunjukkan bagaimana halaman diatur dengan komponen dan route.</p>
+            <pre><code>&lt;Route
+  path="dashboard"
+  element={
+    &lt;PageTransition&gt;
+      &lt;DashboardPage /&gt;
+    &lt;/PageTransition&gt;
+  }
+/&gt;</code></pre>
+            <p class="hover-text">
+              Ini berguna untuk mengenalkan komponen, props, JSX, dan konsep Single Page Application.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Penjelasan File dan Folder Pendukung</h2>
+        <p class="text-block">
+          Saat belajar project besar, siswa sering fokus ke file utama saja. Padahal file pendukung seperti
+          konfigurasi, environment, build file, dan deployment juga sangat penting karena menentukan aplikasi bisa
+          berjalan atau tidak.
+        </p>
+        <div class="overview">
+          <article class="card">
+            <h3>Folder penting di root project</h3>
+            <div class="list-box">
+              <div class="item"><strong>backend/</strong> Berisi API, logika bisnis, koneksi database, scheduler, dan WebSocket.</div>
+              <div class="item"><strong>frontend/</strong> Berisi tampilan React, halaman, komponen, context, hooks, dan service API.</div>
+              <div class="item"><strong>docs/</strong> Berisi bahan presentasi dan catatan pengembangan untuk menjelaskan project.</div>
+              <div class="item"><strong>deploy/</strong> Berisi file produksi seperti Nginx config, script deploy, dan PM2 config.</div>
+              <div class="item"><strong>docker-compose.yml</strong> Menjalankan service seperti PostgreSQL dengan Docker saat setup.</div>
+              <div class="item"><strong>README.md</strong> Titik awal untuk memahami struktur, cara jalan, dan akun demo.</div>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>File pendukung yang sering dianggap kecil</h3>
+            <div class="list-box">
+              <div class="item"><strong>.env.example</strong> Template variabel rahasia dan konfigurasi dasar tanpa membocorkan nilai asli.</div>
+              <div class="item"><strong>package.json</strong> Daftar package, script, dan metadata project.</div>
+              <div class="item"><strong>package-lock.json</strong> Mengunci versi dependency agar hasil install antar perangkat tetap konsisten.</div>
+              <div class="item"><strong>vite.config.js</strong> Mengatur dev server frontend, proxy API, dan proses build.</div>
+              <div class="item"><strong>tailwind.config.js</strong> Menentukan scanning class CSS utilitas dari Tailwind.</div>
+              <div class="item"><strong>server.js</strong> File starter backend untuk koneksi database, HTTP server, port, dan scheduler.</div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Memahami API pada Hygiopark</h2>
+        <p class="text-block">
+          API adalah jembatan komunikasi antara frontend dan backend. Saat user menekan tombol di halaman web,
+          frontend tidak langsung mengambil data dari database, tetapi mengirim request ke API. Backend kemudian
+          memproses request itu, berkomunikasi dengan database lewat Prisma, lalu mengirim response kembali ke frontend.
+        </p>
+        <div class="overview">
+          <article class="card">
+            <h3>Alur kerja API yang sederhana</h3>
+            <div class="list-box">
+              <div class="item"><strong>1. User melakukan aksi</strong> misalnya login, melihat slot, atau membuat reservasi dari halaman React.</div>
+              <div class="item"><strong>2. Frontend mengirim request</strong> memakai Axios ke alamat API seperti <code>/api/auth</code> atau <code>/api/slots</code>.</div>
+              <div class="item"><strong>3. Backend Express menerima request</strong> lalu menjalankan route, middleware, dan service yang sesuai.</div>
+              <div class="item"><strong>4. Prisma mengakses PostgreSQL</strong> untuk membaca atau menyimpan data yang dibutuhkan.</div>
+              <div class="item"><strong>5. Backend mengirim response JSON</strong> agar frontend bisa menampilkan hasil ke user.</div>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Contoh endpoint utama yang ada</h3>
+            <div class="list-box">
+              <div class="item"><strong><code>/api/auth</code></strong> untuk login dan autentikasi user.</div>
+              <div class="item"><strong><code>/api/users</code></strong> untuk data pengguna dan manajemen akun.</div>
+              <div class="item"><strong><code>/api/slots</code></strong> untuk melihat status slot parkir.</div>
+              <div class="item"><strong><code>/api/reservations</code></strong> untuk membuat dan melihat reservasi parkir.</div>
+              <div class="item"><strong><code>/api/payments</code></strong> untuk alur pembayaran.</div>
+              <div class="item"><strong><code>/api/waitlist</code></strong> untuk antrean saat slot penuh.</div>
+              <div class="item"><strong><code>/api/recurring</code></strong> untuk booking berulang.</div>
+              <div class="item"><strong><code>/api/analytics</code></strong> untuk ringkasan dashboard dan laporan.</div>
+            </div>
+          </article>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <h3>Contoh kode frontend memanggil API</h3>
+            <pre><code>const rawBaseURL = import.meta.env.VITE_API_URL || "";
+const BASE_URL = rawBaseURL ? rawBaseURL.replace(/\/+$/, "") + "/api" : "/api";
+
+const api = axios.create({
+  baseURL: BASE_URL,
+  headers: { "Content-Type": "application/json" },
+});</code></pre>
+            <p class="hover-text">
+              Kode ini menunjukkan bahwa frontend punya alamat dasar API. Jadi saat frontend ingin login atau mengambil
+              data slot, request akan diarahkan ke backend melalui base URL tersebut.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>Contoh struktur route backend</h3>
+            <pre><code>router.use("/users", usersRoutes);
+router.use("/slots", slotsRoutes);
+router.use("/reservations", reservationsRoutes);
+router.use("/payments", paymentRoutes);
+router.use("/waitlist", waitlistRoutes);</code></pre>
+            <p class="hover-text">
+              Dari sini siswa bisa memahami bahwa backend membagi API berdasarkan fitur. Ini membuat project lebih rapi
+              daripada menaruh semua endpoint dalam satu file besar.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>Apa isi request dan response?</h3>
+            <div class="list-box">
+              <div class="item"><strong>Request</strong> adalah data yang dikirim frontend ke backend, misalnya email dan password saat login.</div>
+              <div class="item"><strong>Response</strong> adalah balasan backend, misalnya token login, data user, daftar slot, atau pesan error.</div>
+              <div class="item"><strong>JSON</strong> adalah format data yang paling sering dipakai karena mudah dibaca manusia dan program.</div>
+              <div class="item"><strong>Status code</strong> seperti <code>200</code>, <code>401</code>, atau <code>404</code> membantu menjelaskan hasil request.</div>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Hubungan API dengan keamanan</h3>
+            <p class="hover-text">
+              Tidak semua endpoint boleh diakses semua orang. Karena itu Hygiopark memakai token JWT dan middleware
+              otorisasi. Setelah login, token disimpan di frontend lalu dikirim di header Authorization saat request
+              berikutnya dilakukan.
+            </p>
+            <pre><code>api.interceptors.request.use((config) =&gt; {
+  const token = localStorage.getItem("pw_token");
+  if (token) config.headers.Authorization = `Bearer ${token}`;
+  return config;
+});</code></pre>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Bagaimana Cara Mendevelop Web Parkir Ini</h2>
+        <p class="text-block">
+          Mengembangkan Hygiopark berarti menyiapkan alat, memahami alur data, lalu bekerja bertahap. Jangan langsung
+          lompat ke fitur besar. Mulailah dari menjalankan project, membaca struktur file, lalu ubah satu bagian kecil
+          agar paham dampaknya.
+        </p>
+        <div class="timeline">
+          <article class="step"><div class="num">01</div><div><h3>Siapkan tools dasar</h3><p>Install Node.js, npm, PostgreSQL atau Docker, code editor, dan browser. Ini adalah pondasi agar backend dan frontend bisa dijalankan.</p></div></article>
+          <article class="step"><div class="num">02</div><div><h3>Buat environment file</h3><p>Salin <code>.env.example</code> menjadi <code>.env</code> atau <code>.env.local</code>, lalu isi URL database, secret JWT, dan URL frontend-backend.</p></div></article>
+          <article class="step"><div class="num">03</div><div><h3>Install dependency</h3><p>Jalankan <code>npm install</code> di folder backend dan frontend agar semua library yang tercantum di <code>package.json</code> terpasang.</p></div></article>
+          <article class="step"><div class="num">04</div><div><h3>Siapkan database</h3><p>Jalankan PostgreSQL, lalu gunakan Prisma untuk generate client, migrate schema, dan isi data awal dengan seed.</p></div></article>
+          <article class="step"><div class="num">05</div><div><h3>Jalankan backend</h3><p>Backend menyediakan API, autentikasi, logika reservasi, Midtrans, waitlist, recurring, dan update socket.</p></div></article>
+          <article class="step"><div class="num">06</div><div><h3>Jalankan frontend</h3><p>Frontend React memanggil API backend, menampilkan halaman, menyimpan token login, dan menerima update real-time.</p></div></article>
+          <article class="step"><div class="num">07</div><div><h3>Ubah fitur sedikit demi sedikit</h3><p>Contoh aman untuk latihan: ganti label tombol, tambah field kecil, ubah warna status slot, lalu lanjut ke fitur baru jika sudah paham alur.</p></div></article>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Persiapan Praktik untuk Pemula</h2>
+        <p class="text-block">
+          Kalau halaman ini dipakai sebagai bahan belajar, siswa juga perlu tahu bahwa coding tidak dimulai dari
+          mengetik fitur, tetapi dari menyiapkan lingkungan kerja yang benar. Persiapan yang rapi akan membuat proses
+          belajar jauh lebih lancar dan tidak cepat bingung saat menemui error.
+        </p>
+        <div class="split">
+          <article class="card">
+            <h3>Yang Perlu Disiapkan</h3>
+            <div class="list-box">
+              <div class="item"><strong>Node.js dan npm</strong> karena backend dan frontend sama-sama berjalan di ekosistem JavaScript.</div>
+              <div class="item"><strong>Database PostgreSQL atau Docker</strong> karena Hygiopark menyimpan data pada database relasional.</div>
+              <div class="item"><strong>Code editor</strong> untuk membuka folder project, mencari file, dan mengedit source code.</div>
+              <div class="item"><strong>Browser</strong> untuk melihat hasil frontend dan mengetes alur user.</div>
+              <div class="item"><strong>Terminal</strong> untuk menjalankan perintah install, migrate, seed, dan dev server.</div>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Yang Harus Dipahami Sebelum Menjalankan</h3>
+            <div class="list-box">
+              <div class="item"><strong>Backend dan frontend berbeda folder</strong>, jadi perintah install dan run dilakukan masing-masing.</div>
+              <div class="item"><strong>Database harus aktif</strong> sebelum migrasi Prisma dan seed dijalankan.</div>
+              <div class="item"><strong>File env wajib dibuat</strong> karena aplikasi membaca URL dan secret dari sana.</div>
+              <div class="item"><strong>Seed penting untuk demo</strong> karena akun demo dan data slot dibuat dari script seed.</div>
+              <div class="item"><strong>Login berhasil bukan akhir</strong>, tetap perlu cek dashboard, slot, reservasi, dan jika perlu websocket.</div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Istilah Kecil yang Wajib Dipahami Pemula</h2>
+        <div class="feature-grid">
+          <article class="feature">
+            <h3>Apa itu Prisma?</h3>
+            <p class="hover-text">Prisma adalah ORM. Tugasnya menjembatani kode JavaScript dengan database PostgreSQL supaya query lebih rapi, typed, dan mudah dibaca.</p>
+          </article>
+          <article class="feature">
+            <h3>Apa itu PostgreSQL?</h3>
+            <p class="hover-text">PostgreSQL adalah sistem database relasional. Di Hygiopark, ia menyimpan tabel user, slot, reservasi, payment, audit log, dan lainnya.</p>
+          </article>
+          <article class="feature">
+            <h3>Apa itu node_modules?</h3>
+            <p class="hover-text">Folder hasil install dependency. Isinya library pihak ketiga. Folder ini besar dan biasanya tidak perlu dijelaskan detail saat presentasi.</p>
+          </article>
+          <article class="feature">
+            <h3>Apa itu config?</h3>
+            <p class="hover-text">Config adalah file pengaturan, misalnya koneksi Prisma, Vite proxy, port server, atau Nginx. Config membantu aplikasi menyesuaikan environment.</p>
+          </article>
+          <article class="feature">
+            <h3>Apa itu middleware?</h3>
+            <p class="hover-text">Middleware adalah fungsi perantara sebelum request sampai ke controller. Biasanya dipakai untuk cek token, logging, atau pembatasan request.</p>
+          </article>
+          <article class="feature">
+            <h3>Apa itu route?</h3>
+            <p class="hover-text">Route adalah alamat endpoint. Contoh: <code>/api/slots</code> untuk data slot atau <code>/api/auth</code> untuk login/register.</p>
+          </article>
+          <article class="feature">
+            <h3>Apa itu service?</h3>
+            <p class="hover-text">Service adalah tempat logika bisnis yang lebih kompleks, misalnya menyelesaikan reservasi yang sudah lewat atau memproses waitlist.</p>
+          </article>
+          <article class="feature">
+            <h3>Apa itu seed?</h3>
+            <p class="hover-text">Seed adalah script untuk mengisi data awal, misalnya akun demo, lot, slot, reservasi, dan payment supaya aplikasi cepat diuji.</p>
+          </article>
+          <article class="feature">
+            <h3>Apa itu real-time?</h3>
+            <p class="hover-text">Real-time berarti data berubah langsung saat ada event baru. Pada Hygiopark, status slot bisa update lewat Socket.IO tanpa refresh halaman.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>AI dan Tools yang Bisa Membantu Membuat Web Ini</h2>
+        <p class="text-block">
+          Dari struktur project dan dokumen pengembangan, terlihat bahwa workflow Hygiopark cocok dikerjakan dengan
+          bantuan tools modern seperti code editor, terminal, Git, documentation notes, dan AI assistant. Bahkan ada
+          file prompt pengembangan di <code>docs/development/upgrade-modules/</code> yang menunjukkan pola kerja
+          berbasis instruksi yang terarah.
+        </p>
+        <div class="split">
+          <article class="card">
+            <span class="pill ok">Tools</span>
+            <h3>Peran alat bantu</h3>
+            <div class="mini-list">
+              <div><strong>VS Code atau editor lain</strong> untuk membaca, mencari, dan mengubah source code.</div>
+              <div><strong>Terminal</strong> untuk menjalankan <code>npm install</code>, <code>npm run dev</code>, Prisma migrate, dan seed.</div>
+              <div><strong>Git</strong> untuk menyimpan riwayat perubahan dan bekerja lebih aman.</div>
+              <div><strong>Docker</strong> untuk menyalakan PostgreSQL atau service lain dengan setup yang lebih konsisten.</div>
+              <div><strong>AI assistant</strong> untuk bantu membaca codebase, membuat draft fitur, memperbaiki bug, dan menjelaskan konsep.</div>
+            </div>
+          </article>
+
+          <article class="card">
+            <span class="pill warn">AI Workflow</span>
+            <h3>Cara berpikir saat memakai AI</h3>
+            <div class="mini-list">
+              <div><strong>Jangan minta "buat aplikasi parkir"</strong> secara terlalu umum. Beri konteks folder, file, dan tujuan fitur.</div>
+              <div><strong>Mulai dari masalah kecil</strong> seperti "jelaskan auth middleware" atau "buat halaman presentasi baru".</div>
+              <div><strong>Minta AI membaca code yang sudah ada</strong> sebelum menyarankan perubahan agar hasilnya menyatu dengan project.</div>
+              <div><strong>Verifikasi hasil AI</strong> dengan menjalankan aplikasi, membaca diff, dan mengecek apakah logika bisnisnya benar.</div>
+              <div><strong>Gunakan AI sebagai partner</strong>, bukan pengganti pemahaman. Tujuan akhirnya tetap supaya developer manusia mengerti.</div>
+            </div>
+          </article>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <h3>Contoh prompt yang bagus</h3>
+            <pre><code>Saya punya project smart parking dengan frontend React,
+backend Express, dan database Prisma PostgreSQL.
+Tolong baca struktur folder yang ada dulu, lalu:
+1. jelaskan alur reservasi
+2. temukan file yang mengatur auth
+3. buat perbaikan kecil tanpa mengubah arsitektur</code></pre>
+            <p class="hover-text">
+              Prompt seperti ini jelas karena menyebut stack, tujuan, dan batasan kerja. AI jadi lebih fokus dan
+              jawabannya lebih relevan.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>Pola pikir yang sehat</h3>
+            <div class="list-box">
+              <div class="item"><strong>Pahami dulu masalahnya</strong> sebelum menyalin jawaban AI.</div>
+              <div class="item"><strong>Pecah tugas besar menjadi kecil</strong> seperti layout, route, API, dan database.</div>
+              <div class="item"><strong>Cek hubungan antar file</strong> karena satu perubahan sering berdampak ke route, service, dan tampilan.</div>
+              <div class="item"><strong>Bandingkan jawaban AI dengan code asli</strong> agar tidak terjadi halusinasi atau saran yang tidak cocok.</div>
+              <div class="item"><strong>Simpan dokumentasi prompt</strong> bila workflow AI ingin diulang atau diajarkan ke orang lain.</div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <footer class="footer">
+        Module pembelajaran ini cocok dipakai setelah halaman Sistem. Urutannya menjadi: pahami gambaran aplikasi,
+        lihat teknologi dan file yang dipakai, pelajari logika kodenya, lalu baru masuk ke database, pengembangan,
+        dan portabilitas.
+      </footer>
+    </div>
+    <script src="presentation-theme.js"></script>
+  </body>
+</html>
+
+
